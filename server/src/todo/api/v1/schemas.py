@@ -1,8 +1,11 @@
-from pydantic import BaseModel, constr
 from typing import Annotated
+
+from pydantic import BaseModel, constr
+
 
 class TodoCreate(BaseModel):
     text: str
+
 
 class TodoRead(BaseModel):
     id: int

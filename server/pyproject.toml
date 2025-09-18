@@ -47,9 +47,6 @@ Documentation = "https://github.com/pfischer1687/vite-fastapi-starter/README.md"
 Repository = "https://github.com/pfischer1687/vite-fastapi-starter"
 Issues = "https://github.com/pfischer1687/vite-fastapi-starter/issues"
 
-[project.scripts]
-todo = "todo.main:app"
-
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
