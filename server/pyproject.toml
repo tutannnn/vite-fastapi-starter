@@ -3,9 +3,9 @@ requires = ["uv_build>=0.8.17,<0.9.0"]
 build-backend = "uv_build"
 
 [project]
-name = "example"
+name = "todo"
 version = "0.1.0"
-description = "Full-stack template with FastAPI, React (Vite + TS + Tailwind), PostgreSQL, and SQLAlchemy."
+description = "Full-stack to-do app template with FastAPI, React (Vite + TS + Tailwind), PostgreSQL, and SQLAlchemy."
 readme = "../README.md"
 requires-python = ">=3.13"
 authors = [
@@ -25,7 +25,11 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
+    "alembic>=1.16.5",
     "fastapi[standard]>=0.116.2",
+    "psycopg2-binary>=2.9.10",
+    "pydantic>=2.11.9",
+    "pydantic-settings>=2.10.1",
     "sqlalchemy>=2.0.43",
 ]
 
@@ -44,7 +48,7 @@ Repository = "https://github.com/pfischer1687/vite-fastapi-starter"
 Issues = "https://github.com/pfischer1687/vite-fastapi-starter/issues"
 
 [project.scripts]
-example = "example.main:app"
+todo = "todo.main:app"
 
 [tool.pyright]
 venvPath = "."

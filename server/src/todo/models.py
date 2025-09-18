@@ -1,0 +1,13 @@
+from sqlalchemy import String
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+
+class Todo(DeclarativeBase):
+    __tablename__ = "todos"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    text: Mapped[str] = mapped_column(String(30))
+
+    def __repr__(self) -> str:
+        return f"Todo(id={self.id!r}, text={self.text!r})"
