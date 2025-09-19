@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from todo.api.v1 import router
+from todo.api.v1 import routes
 
 app = FastAPI()
 
@@ -13,4 +13,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(router.router, prefix="/api/v1/todos", tags=["todos"])
+app.include_router(routes.router, prefix="/api/v1/todos", tags=["todos"])

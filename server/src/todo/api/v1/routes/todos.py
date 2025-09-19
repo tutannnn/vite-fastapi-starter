@@ -1,10 +1,11 @@
 """Defines the API endpoints for version 1 of the application."""
 
-from app.api.v1.schemas.todo import TodoCreate, TodoRead
-from app.api.v1.services.todo import TodoService
-from app.db.session import get_db
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+
+from todo.api.v1.schemas.todo import TodoCreate, TodoRead
+from todo.api.v1.services.todo import TodoService
+from todo.db.session import get_db
 
 router = APIRouter()
 
@@ -32,7 +33,7 @@ def list_todos(
     Returns:
         list[TodoRead]: All todo items from the database.
     """
-    return service.get_todos(db)
+    return service.get_all_todos(db)
 
 
 @router.post("/")
