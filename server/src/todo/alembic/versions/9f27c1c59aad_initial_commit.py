@@ -1,4 +1,4 @@
-"""create todos table
+"""Initial commit
 
 Revision ID: 9f27c1c59aad
 Revises:

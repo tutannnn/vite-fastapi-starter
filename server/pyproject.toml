@@ -54,6 +54,9 @@ venv = ".venv"
 [tool.ruff]
 line-length = 120
 target-version = 'py313'
+exclude = [
+  "src/todo/alembic"
+]
 
 [tool.ruff.lint]
 extend-select = [
@@ -67,6 +70,7 @@ extend-select = [
   "UP",
   "Q"
 ]
+ignore = ["B008"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

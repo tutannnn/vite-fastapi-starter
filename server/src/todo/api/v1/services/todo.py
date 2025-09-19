@@ -1,13 +1,13 @@
+from app.api.v1.schemas.todo import TodoCreate, TodoRead
+from app.db.models.todo import Todo
 from sqlalchemy.orm import Session
-
-from todo.api.v1.schemas import TodoCreate
-from todo.models import Todo
 
 
 class TodoService:
     @staticmethod
     def get_todos(db: Session):
-        return db.query(Todo).all()
+        todos = db.query(Todo).all()
+        return [TodoRead.model_validate(todo) for todo in todos]
 
     @staticmethod
     def create_todo(todo: TodoCreate, db: Session):
@@ -15,4 +15,4 @@ class TodoService:
         db.add(db_todo)
         db.commit()
         db.refresh(db_todo)
-        return db_todo
+        return TodoRead.model_validate(db_todo)
