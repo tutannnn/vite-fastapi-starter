@@ -22,7 +22,7 @@ class TodoService:
         """
         logger.info("Fetching all todos from the DB.")
         todos = db.query(Todo).all()
-        logger.info("Retrieved %d todos from the DB.", len(todos))
+        logger.info(f"Retrieved {len(todos)} todos from the DB.")
         return [TodoRead.model_validate(todo) for todo in todos]
 
     @staticmethod
@@ -36,10 +36,10 @@ class TodoService:
         Returns:
             TodoRead: Todo item inserted into the database.
         """
-        logger.info("Creating todo with content: %s", todo.text)
+        logger.info(f"Creating todo with content: {todo.text}")
         new_todo = Todo(text=todo.text)
         db.add(new_todo)
         db.commit()
         db.refresh(new_todo)
-        logger.info("Created todo with ID: %d", new_todo.id)
+        logger.info(f"Created todo with ID: {new_todo.id}")
         return TodoRead.model_validate(new_todo)

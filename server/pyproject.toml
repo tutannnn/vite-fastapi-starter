@@ -36,6 +36,7 @@ dependencies = [
 
 [tool.uv]
 dev-dependencies = [
+    "httpx>=0.28.1",
     "pre-commit>=4.3.0",
     "pyright[nodejs]>=1.1.405",
     "pytest>=8.4.2",
@@ -68,6 +69,9 @@ extend-select = [
   "Q"
 ]
 ignore = ["B008", "D105"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["D"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
