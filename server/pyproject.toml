@@ -48,10 +48,6 @@ Documentation = "https://github.com/pfischer1687/vite-fastapi-starter/README.md"
 Repository = "https://github.com/pfischer1687/vite-fastapi-starter"
 Issues = "https://github.com/pfischer1687/vite-fastapi-starter/issues"
 
-[tool.pyright]
-venvPath = "."
-venv = ".venv"
-
 [tool.ruff]
 line-length = 120
 target-version = 'py313'
@@ -71,7 +67,7 @@ extend-select = [
   "UP",
   "Q"
 ]
-ignore = ["B008"]
+ignore = ["B008", "D105"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

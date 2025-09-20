@@ -57,13 +57,13 @@ def stderr_fmt(record: loguru.Record) -> str:
         return "<green>{time}</> - {level} - <lvl>{message}</lvl>\n{exception}"
 
 
-def setup_logging(verbose: int = 1) -> None:
+def setup_logging(verbose: int = 2) -> None:
     """Configure Loguru logging.
 
     This sets up a stderr sink with dynamic formatting.
 
     Args:
-        verbose (int, optional): Verbosity level (-v, -vv, -vvv). Defaults to 0.
+        verbose (int, optional): Verbosity level (-v, -vv, -vvv). Defaults to 2.
     """
     logger.remove()
     level = Verbosity.from_count(verbose).value
