@@ -1,5 +1,6 @@
 """Services called by the todo router for interacting with the database."""
 
+from fastapi import HTTPException
 from loguru import logger
 from sqlalchemy.orm import Session
 
@@ -29,7 +30,7 @@ class TodoService:
             },
         )
 
-        todos = db.query(Todo).filter(Todo.user_id == user.id).all()
+        todos = db.query(Todo).filter(Todo.user_id == user.id).order_by(Todo.id).all()
 
         logger.info(
             "Fetched todos successfuly",
@@ -68,3 +69,22 @@ class TodoService:
         )
 
         return TodoRead.model_validate(new_todo)
+
+    @staticmethod
+    def delete_todo(todo_id: int, db: Session, user: User) -> None:
+        """Deletes a todo if it exists and belongs to the user.
+
+        Args:
+            todo_id (int): ID of the todo to delete.
+            db (Session): DB session for deletions.
+            user (User): Authenticated user.
+
+        Raises:
+            HTTPException: 404 if todo not found or not owned by user.
+        """
+        todo = db.query(Todo).filter_by(id=todo_id, user_id=user.id).first()
+        if not todo:
+            raise HTTPException(status_code=404, detail="Todo not found")
+
+        db.delete(todo)
+        db.commit()

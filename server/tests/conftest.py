@@ -1,3 +1,4 @@
+import uuid
 from collections.abc import Generator
 
 import pytest
@@ -52,7 +53,8 @@ def db() -> Generator[Session]:
 
 @pytest.fixture
 def test_user(db: Session) -> User:
-    user = User(id=1, username="test")
+    username = f"test_{uuid.uuid4().hex[:6]}"
+    user = User(username=username)
     db.add(user)
     db.commit()
     db.refresh(user)

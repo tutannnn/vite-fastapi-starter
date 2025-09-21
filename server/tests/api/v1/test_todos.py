@@ -46,3 +46,18 @@ def test_post_and_get_todo(client: TestClient, test_user: User):
     assert new_todo_data["text"] in todo_texts
     assert second_todo_data["text"] in todo_texts
     assert len(todos) > 1
+
+
+def test_delete_todo(client: TestClient, test_user: User):
+    # Create todo.
+    headers = auth_headers(test_user.id)
+    todo_data = {"text": "Solve the P versus NP problem."}
+    create_resp = client.post("/api/v1/todo/", json=todo_data, headers=headers)
+    todo_id = create_resp.json()["id"]
+
+    # Delete it.
+    delete_resp = client.delete(f"/api/v1/todo/{todo_id}", headers=headers)
+    assert delete_resp.status_code == 204
+
+    get_resp = client.get("/api/v1/todo/", headers=headers)
+    assert all(todo["id"] != todo_id for todo in get_resp.json())

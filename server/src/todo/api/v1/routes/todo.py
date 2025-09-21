@@ -59,3 +59,21 @@ def create_todo(
         TodoRead: Newly created todo item from the DB.
     """
     return service.create_todo(db, todo, user)
+
+
+@router.delete("/{todo_id}", status_code=204)
+def delete_todo(
+    todo_id: int,
+    db: Session = Depends(get_db),
+    service: TodoService = Depends(get_todo_service),
+    user: User = Depends(get_current_user),
+) -> None:
+    """Deletes a todo owned by the current user.
+
+    Args:
+        todo_id (int): ID of the todo to delete.
+        db (Session, optional): DB sessions for deletions. Defaults to Depends(get_db).
+        service (TodoService, optional): Service for handling DB deletions. Defaults to Depends(get_todo_service).
+        user (User, optional): Authenticated user. Defaults to Depends(get_current_user).
+    """
+    service.delete_todo(todo_id, db, user)
