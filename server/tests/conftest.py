@@ -41,6 +41,10 @@ def client():
         yield c
 
 
+def auth_headers(user_id: int):
+    return {"Authorization": f"Bearer {user_id}"}
+
+
 @pytest.fixture
 def db() -> Generator[Session]:
     yield from override_get_db()
