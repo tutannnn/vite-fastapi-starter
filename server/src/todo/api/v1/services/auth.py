@@ -5,7 +5,8 @@ It is intentionally designed to be replaced with production-ready authentication
 """
 
 from fastapi import HTTPException
-from sqlalchemy.orm import Session
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from todo.api.v1.schemas.auth import UserCreate, UserRead
 from todo.db.models.user import User
@@ -15,12 +16,12 @@ class AuthService:
     """Services called by the auth router for interacting with the database."""
 
     @staticmethod
-    def signup(user_in: UserCreate, db: Session) -> UserRead:
+    async def signup(user_in: UserCreate, db: AsyncSession) -> UserRead:
         """Creates a new user in the DB.
 
         Args:
             user_in (UserCreate): Desired user credentials.
-            db (Session): DB session for I/O operations.
+            db (AsyncSession): DB session for I/O operations.
 
         Raises:
             HTTPException: 400 if the username is already taken.
@@ -28,24 +29,27 @@ class AuthService:
         Returns:
             UserRead: Newly created user data.
         """
-        existing = db.query(User).filter(User.username == user_in.username).first()
+        stmt = select(User).filter(User.username == user_in.username)
+        result = await db.execute(stmt)
+        existing = result.scalars().first()
+
         if existing:
             raise HTTPException(status_code=400, detail="Username already taken")
 
         user = User(username=user_in.username)
         db.add(user)
-        db.commit()
-        db.refresh(user)
+        await db.commit()
+        await db.refresh(user)
 
         return UserRead.model_validate(user)
 
     @staticmethod
-    def login(user_in: UserCreate, db: Session) -> UserRead:
+    async def login(user_in: UserCreate, db: AsyncSession) -> UserRead:
         """Logs in a user based on their credentials.
 
         Args:
             user_in (UserCreate): User credentials.
-            db (Session): DB session for I/O operations.
+            db (AsyncSession): DB session for I/O operations.
 
         Raises:
             HTTPException: 400 if the user is not found.
@@ -53,7 +57,10 @@ class AuthService:
         Returns:
             UserRead: Authenticated user data.
         """
-        user = db.query(User).filter(User.username == user_in.username).first()
+        stmt = select(User).filter(User.username == user_in.username)
+        result = await db.execute(stmt)
+        user = result.scalars().first()
+
         if not user:
             raise HTTPException(status_code=400, detail="Invalid username")
 

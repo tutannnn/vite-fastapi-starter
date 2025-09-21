@@ -1,33 +1,29 @@
 """Database session management."""
 
-from collections.abc import Generator
+from collections.abc import AsyncGenerator
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from todo.core.config import settings
 
-engine = create_engine(
+engine = create_async_engine(
     settings.db_url,
     echo=True,  # TODO: For SQL debugging in dev.
 )
 
-SessionLocal = sessionmaker(
+SessionLocal = async_sessionmaker(
     bind=engine,
     autoflush=False,
-    autocommit=False,
+    expire_on_commit=False,
     future=True,
 )
 
 
-def get_db() -> Generator[Session]:
+async def get_db() -> AsyncGenerator[AsyncSession]:
     """Yields a database session.
 
     Yields:
-        Session: A database session scoped to the request lifecycle.
+        AsyncGenerator[AsyncSession]: A database session scoped to the request lifecycle.
     """
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+    async with SessionLocal() as session:
+        yield session

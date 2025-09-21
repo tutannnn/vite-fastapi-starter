@@ -5,7 +5,7 @@ It is intentionally designed to be replaced with production-ready authentication
 """
 
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from todo.api.v1.schemas.auth import UserCreate, UserRead
 from todo.api.v1.services.auth import AuthService
@@ -26,37 +26,37 @@ def get_auth_service() -> AuthService:
 
 
 @router.post("/signup")
-def signup(
-    user_in: UserCreate, db: Session = Depends(get_db), service: AuthService = Depends(get_auth_service)
+async def signup(
+    user_in: UserCreate, db: AsyncSession = Depends(get_db), service: AuthService = Depends(get_auth_service)
 ) -> UserRead:
     """Creates a new user in the DB.
 
     Args:
         user_in (UserCreate): Desired user credentials.
-        db (Session, optional): DB session for I/O operations. Defaults to Depends(get_db).
+        db (AsyncSession, optional): DB session for I/O operations. Defaults to Depends(get_db).
         service (AuthService, optional): Authorization service. Defaults to Depends(get_auth_service).
 
     Returns:
         UserRead: Newly created user data.
     """
-    return service.signup(user_in, db)
+    return await service.signup(user_in, db)
 
 
 @router.post("/login")
-def login(
-    user_in: UserCreate, db: Session = Depends(get_db), service: AuthService = Depends(get_auth_service)
+async def login(
+    user_in: UserCreate, db: AsyncSession = Depends(get_db), service: AuthService = Depends(get_auth_service)
 ) -> UserRead:
     """Logs in a user based on their credentials.
 
     Args:
         user_in (UserCreate): User credentials.
-        db (Session, optional): DB session for I/O operations. Defaults to Depends(get_db).
+        db (AsyncSession, optional): DB session for I/O operations. Defaults to Depends(get_db).
         service (AuthService, optional): Authorization service. Defaults to Depends(get_auth_service).
 
     Returns:
         UserRead: Authenticated user data.
     """
-    return service.login(user_in, db)
+    return await service.login(user_in, db)
 
 
 @router.get("/me")

@@ -2,7 +2,8 @@
 
 from fastapi import HTTPException
 from loguru import logger
-from sqlalchemy.orm import Session
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from todo.api.v1.schemas.todo import TodoCreate, TodoRead
 from todo.db.models.todo import Todo
@@ -13,7 +14,7 @@ class TodoService:
     """Services called by the todo router for interacting with the database."""
 
     @staticmethod
-    def get_all_todos(db: Session, user: User) -> list[TodoRead]:
+    async def get_all_todos(db: AsyncSession, user: User) -> list[TodoRead]:
         """Fetches all todo items from the database for a given user.
 
         Args:
@@ -30,7 +31,9 @@ class TodoService:
             },
         )
 
-        todos = db.query(Todo).filter(Todo.user_id == user.id).order_by(Todo.id).all()
+        stmt = select(Todo).filter(Todo.user_id == user.id).order_by(Todo.id)
+        result = await db.execute(stmt)
+        todos = result.scalars().all()
 
         logger.info(
             "Fetched todos successfuly",
@@ -42,11 +45,11 @@ class TodoService:
         return [TodoRead.model_validate(todo) for todo in todos]
 
     @staticmethod
-    def create_todo(db: Session, todo: TodoCreate, user: User) -> TodoRead:
+    async def create_todo(db: AsyncSession, todo: TodoCreate, user: User) -> TodoRead:
         """Creates a new todo item in the database.
 
         Args:
-            db (Session): Database session for insertions.
+            db (AsyncSession): Database session for insertions.
             todo (TodoCreate): Input data for the new todo.
             user (User): Authenticated user from the DB.
 
@@ -57,8 +60,8 @@ class TodoService:
 
         new_todo = Todo(text=todo.text, user_id=user.id)
         db.add(new_todo)
-        db.commit()
-        db.refresh(new_todo)
+        await db.commit()
+        await db.refresh(new_todo)
 
         logger.info(
             "Created todo successfully",
@@ -71,20 +74,23 @@ class TodoService:
         return TodoRead.model_validate(new_todo)
 
     @staticmethod
-    def delete_todo(todo_id: int, db: Session, user: User) -> None:
+    async def delete_todo(todo_id: int, db: AsyncSession, user: User) -> None:
         """Deletes a todo if it exists and belongs to the user.
 
         Args:
             todo_id (int): ID of the todo to delete.
-            db (Session): DB session for deletions.
+            db (AsyncSession): DB session for deletions.
             user (User): Authenticated user.
 
         Raises:
             HTTPException: 404 if todo not found or not owned by user.
         """
-        todo = db.query(Todo).filter_by(id=todo_id, user_id=user.id).first()
+        stmt = select(Todo).filter_by(id=todo_id, user_id=user.id)
+        result = await db.execute(stmt)
+        todo = result.scalars().first()
+
         if not todo:
             raise HTTPException(status_code=404, detail="Todo not found")
 
-        db.delete(todo)
-        db.commit()
+        await db.delete(todo)
+        await db.commit()
