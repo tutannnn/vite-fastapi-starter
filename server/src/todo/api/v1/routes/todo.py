@@ -1,4 +1,4 @@
-"""Defines the API endpoints for version 1 of the application."""
+"""Defines the todo-related API endpoints for version 1 of the application."""
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session

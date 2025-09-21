@@ -3,6 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from todo.api.v1.routes.auth import router as auth_router
 from todo.api.v1.routes.todo import router as todo_router
 
 
@@ -27,6 +28,7 @@ def _register_routes(app: FastAPI) -> None:
     Args:
         app (FastAPI): App instance.
     """
+    app.include_router(auth_router, prefix="/api/v1/auth", tags=["auth"])
     app.include_router(todo_router, prefix="/api/v1/todo", tags=["todo"])
 
 
