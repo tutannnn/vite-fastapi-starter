@@ -1,13 +1,13 @@
 from fastapi.testclient import TestClient
-from server.tests.conftest import auth_headers
 
+from tests.conftest import auth_headers
 from todo.db.models.user import User
 
 
 def test_post_and_get_todo(client: TestClient, test_user: User):
     # Test that user authentication is required for the todo endpoint.
     response = client.get("/api/v1/todo/")
-    assert response.status_code == 401
+    assert response.status_code == 403
 
     headers = auth_headers(test_user.id)
 
