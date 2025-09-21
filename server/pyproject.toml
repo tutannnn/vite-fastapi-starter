@@ -72,6 +72,7 @@ ignore = ["B008", "D105"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = ["D"]
+"src/todo/db/models_registry.py" = ["F401"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

@@ -1,16 +1,19 @@
+from collections.abc import Generator
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import StaticPool, create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
 from todo.db.base import Base
+from todo.db.models.user import User
 from todo.db.session import get_db
 from todo.main import app
 
 # Use local SQLite file for unit tests.
-SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
+TEST_DB_URI = "sqlite:///:memory:"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}, poolclass=StaticPool)
+engine = create_engine(TEST_DB_URI, connect_args={"check_same_thread": False}, poolclass=StaticPool)
 TestingSessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
 
@@ -36,3 +39,17 @@ def setup_test_database():
 def client():
     with TestClient(app) as c:
         yield c
+
+
+@pytest.fixture
+def db() -> Generator[Session]:
+    yield from override_get_db()
+
+
+@pytest.fixture
+def test_user(db: Session) -> User:
+    user = User(id=1, username="test")
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return user
