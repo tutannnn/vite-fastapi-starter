@@ -6,13 +6,13 @@ interface InputFieldProps {
   error?: string;
 }
 
-export function InputField({
+export const InputField = ({
   label,
   value,
   onChange,
   placeholder,
   error,
-}: InputFieldProps) {
+}: InputFieldProps) => {
   return (
     <div className="mb-4">
       <label className="block text-sm font-medium text-gray-700">{label}</label>
@@ -28,4 +28,4 @@ export function InputField({
       {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
     </div>
   );
-}
+};

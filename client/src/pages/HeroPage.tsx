@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-export default function HeroPage() {
+const HeroPage = () => {
   return (
     <div className="bg-gray-900 min-h-screen flex flex-col">
       <header className="absolute inset-x-0 top-0 z-50 p-6 flex justify-between items-center">
@@ -34,4 +34,6 @@ export default function HeroPage() {
       </main>
     </div>
   );
-}
+};
+
+export default HeroPage;

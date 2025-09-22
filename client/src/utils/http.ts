@@ -1,4 +1,4 @@
-async function handleResponse<T>(resp: Response): Promise<T> {
+const handleResponse = async <T>(resp: Response): Promise<T> => {
   const json = await resp.json();
 
   if (!resp.ok) {
@@ -7,12 +7,12 @@ async function handleResponse<T>(resp: Response): Promise<T> {
   }
 
   return json;
-}
+};
 
-export async function fetchJson<T>(
+export const fetchJson = async <T>(
   url: string,
   options?: RequestInit,
-): Promise<T> {
+): Promise<T> => {
   const resp = await fetch(url, options);
   return handleResponse<T>(resp);
-}
+};

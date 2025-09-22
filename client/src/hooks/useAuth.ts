@@ -1,7 +1,8 @@
 "use client";
 
 /**
- * NOTE: This dev-only implementation uses header-based "Bearer <user_id>" auth and minimal identity checks.
+ * @note
+ * This dev-only implementation uses header-based "Bearer <user_id>" auth and minimal identity checks.
  * It is intentionally designed to be replaced with production-ready authentication (e.g., Auth0, OAuth2, JWT).
  */
 
@@ -15,7 +16,7 @@ import {
 
 const QUERY_KEY = ["auth", "me"];
 
-export function useAuth() {
+export const useAuth = () => {
   const queryClient = useQueryClient();
   const userId = getStoredUserId();
 
@@ -64,4 +65,4 @@ export function useAuth() {
     login: loginMutation,
     logout,
   };
-}
+};

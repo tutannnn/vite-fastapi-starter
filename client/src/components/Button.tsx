@@ -7,12 +7,12 @@ interface ButtonProps {
   loading?: boolean;
 }
 
-export function Button({
+export const Button = ({
   children,
   onClick,
   disabled = false,
   loading = false,
-}: ButtonProps) {
+}: ButtonProps) => {
   return (
     <button
       onClick={onClick}
@@ -22,4 +22,4 @@ export function Button({
       {loading ? <Spinner /> : children}
     </button>
   );
-}
+};
