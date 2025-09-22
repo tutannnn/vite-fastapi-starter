@@ -6,6 +6,7 @@ It is intentionally designed to be replaced with production-ready authentication
 
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from loguru import logger
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -31,11 +32,33 @@ async def get_current_user(
     """
     user_id = int(credentials.credentials)
 
+    logger.info(
+        "Getting current user",
+        extra={
+            "user_id": user_id,
+        },
+    )
+
     stmt = select(User).filter_by(id=user_id)
     result = await db.execute(stmt)
     user = result.scalars().first()
 
     if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+        err_msg = "User not found"
+        logger.info(
+            err_msg,
+            extra={
+                "user_id": user_id,
+            },
+        )
+        raise HTTPException(status_code=404, detail=err_msg)
+
+    logger.info(
+        "Got current user successfully",
+        extra={
+            "user_id": user.id,
+            "username": user.username,
+        },
+    )
 
     return user

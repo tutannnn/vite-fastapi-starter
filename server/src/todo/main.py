@@ -7,7 +7,7 @@ from todo.api.v1.routes.auth import router as auth_router
 from todo.api.v1.routes.todo import router as todo_router
 
 
-def _configure_cors(app: FastAPI) -> None:
+def _configure_cors(app: "FastAPI") -> None:
     """Adds CORS middleware to the app.
 
     Args:
@@ -22,7 +22,7 @@ def _configure_cors(app: FastAPI) -> None:
     )
 
 
-def _register_routes(app: FastAPI) -> None:
+def _register_routes(app: "FastAPI") -> None:
     """Registers API routers with the app.
 
     Args:
@@ -32,7 +32,7 @@ def _register_routes(app: FastAPI) -> None:
     app.include_router(todo_router, prefix="/api/v1/todo", tags=["todo"])
 
 
-def create_app() -> FastAPI:
+def create_app() -> "FastAPI":
     """Returns a configured app instance.
 
     Returns:

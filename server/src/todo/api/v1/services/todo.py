@@ -85,12 +85,36 @@ class TodoService:
         Raises:
             HTTPException: 404 if todo not found or not owned by user.
         """
+        logger.info(
+            "Deleting todo",
+            extra={
+                "todo_id": todo_id,
+                "user_id": user.id,
+            },
+        )
+
         stmt = select(Todo).filter_by(id=todo_id, user_id=user.id)
         result = await db.execute(stmt)
         todo = result.scalars().first()
 
         if not todo:
-            raise HTTPException(status_code=404, detail="Todo not found")
+            err_msg = "Todo not found"
+            logger.error(
+                err_msg,
+                extra={
+                    "todo_id": todo_id,
+                    "user_id": user.id,
+                },
+            )
+            raise HTTPException(status_code=404, detail=err_msg)
 
         await db.delete(todo)
         await db.commit()
+
+        logger.info(
+            "Deleted todo successfully",
+            extra={
+                "todo_id": todo_id,
+                "user_id": user.id,
+            },
+        )

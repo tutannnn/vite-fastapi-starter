@@ -1,7 +1,7 @@
 """Added user and todo tables
 
 Revision ID: 6f79903f624b
-Revises: 
+Revises:
 Create Date: 2025-09-21 03:44:53.423168
 
 """
