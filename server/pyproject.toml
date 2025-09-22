@@ -6,7 +6,6 @@ build-backend = "uv_build"
 name = "todo"
 version = "0.1.0"
 description = "Full-stack to-do app template with FastAPI, React (Vite + TS + Tailwind), PostgreSQL, and SQLAlchemy."
-readme = "../README.md"
 requires-python = ">=3.13"
 authors = [
     {name = "Paul Fischer", email = "paulfischerdev@gmail.com"}
@@ -35,8 +34,8 @@ dependencies = [
     "sqlalchemy[asyncio]>=2.0.43",
 ]
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "aiosqlite>=0.21.0",
     "httpx>=0.28.1",
     "pre-commit>=4.3.0",

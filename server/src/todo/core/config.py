@@ -8,7 +8,7 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
-    db_url: str = "postgresql+asyncpg://postgres:example@localhost:5432/postgres"
+    db_url: str = "postgresql+asyncpg://postgres:example@db:5432/postgres"
 
 
 settings = Settings()

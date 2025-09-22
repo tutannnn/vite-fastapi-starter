@@ -19,7 +19,7 @@ const TodoPage = () => {
     <div className="flex flex-col h-screen bg-gray-900">
       <header className="fixed top-0 left-0 right-0 flex justify-between items-center text-white bg-gray-900 z-30 px-4 h-16 border-b border-gray-700">
         <span className="font-bold text-2xl">
-          Welcome back, {user!.username}! Here are your todos:
+          Welcome {user!.username}! Here are your todos:
         </span>
         <Link
           to="/"
