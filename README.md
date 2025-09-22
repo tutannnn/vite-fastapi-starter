@@ -1,7 +1,7 @@
 # vite-fastapi-starter
 
-Full-stack too app to use as a template for projects using Python, FastAPI, SQLAlchemy, Typescript, React, Vite,
-Tailwind, and a PostgreSQL database!
+A full-stack todo app you can use as a template for projects using Python, FastAPI, SQLAlchemy, Typescript, React, Vite,
+Tailwind, and PostgreSQL!
 
 ---
 
